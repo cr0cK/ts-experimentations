@@ -1,0 +1,20 @@
+{
+  "fr": {
+    "searchBar": {
+      "placeholder": "Rechercher mots ou # tags..."
+    },
+    "menuBar": [
+      { "label": "Home", "icon": "graph-bar" },
+      { "label": "Saved", "icon": "angled-pin" },
+      { "label": "Create", "icon": "add-circle" },
+      { "label": "More", "icon": "ellipsis" }
+    ],
+    "categories": [
+      ["PLT", { "label": "Planète", "color": "green" }],
+      ["ECO", { "label": "Économie", "color": "blue" }],
+      ["INO", { "label": "Innovation", "color": "orchid" }],
+      ["POL", { "label": "Politique", "color": "darkGray" }],
+      ["HUM", { "label": "Humain", "color": "orange" }]
+    ]
+  }
+}

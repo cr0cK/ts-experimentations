@@ -1,0 +1,3 @@
+# Typescript experimentations
+
+Some useful tricks to share...
