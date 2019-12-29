@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "target": "es5",
+    "jsx": "react",
+    "sourceMap": true,
+    // needed to allow `for of` + iterators for ES5 targets
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "outDir": "build",
+    "lib": ["esnext", "dom", "esnext.asynciterable"],
+    "types": ["node"]
+  },
+  "exclude": ["dist", "trash", "node_modules"]
+}
