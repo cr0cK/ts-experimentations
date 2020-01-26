@@ -1,7 +1,9 @@
 import ContextStores from 'contexts/ContextStores'
 import * as React from 'react'
-import RootStore from 'stores/RootStore'
+import StoreRoot from 'stores/StoreRoot'
 import styled from 'styled-components'
+import 'styles/globals.css'
+import 'styles/normalize.css'
 import SpreadSheet from './SpreadSheet'
 
 interface IAppProps {
@@ -9,13 +11,13 @@ interface IAppProps {
 }
 
 const App: React.FunctionComponent<IAppProps> = props => {
-  const rootStore = new RootStore()
+  const storeRoot = new StoreRoot()
 
   // @ts-ignore
-  window.ROOT_STORE = rootStore
+  window.ROOT_STORE = storeRoot
 
   return (
-    <ContextStores.Provider value={{ rootStore: rootStore }}>
+    <ContextStores.Provider value={{ storeRoot: storeRoot }}>
       <div className={props.className}>
         <SpreadSheet />
       </div>
@@ -31,4 +33,7 @@ export default styled(App)`
 
   display: flex;
   flex-direction: column;
+
+  overflow: scroll;
+  border: 1px solid blue;
 `

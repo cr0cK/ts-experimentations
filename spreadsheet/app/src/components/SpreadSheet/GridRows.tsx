@@ -4,24 +4,25 @@ import * as React from 'react'
 import styled from 'styled-components'
 import GridCell from './GridCell'
 
-interface IGridHeadProps {
+interface IGridRowsProps {
   className?: string
 }
 
-const GridHead: React.FunctionComponent<IGridHeadProps> = props => {
+const GridRows: React.FunctionComponent<IGridRowsProps> = props => {
   const { storeGrid } = useStores()
 
   return (
-    <div attr-name="GridHead" className={props.className}>
-      {storeGrid.theadColumns.map(cell => {
+    <div attr-name="GridRows" className={props.className}>
+      {storeGrid.rows.map(cell => {
         return <GridCell key={cell.coord} cell={cell}></GridCell>
       })}
     </div>
   )
 }
 
-const ObserverGridHead = observer(GridHead)
+const ObserverGridRows = observer(GridRows)
 
-export default styled(ObserverGridHead)`
+export default styled(ObserverGridRows)`
   display: flex;
+  flex-direction: column;
 `

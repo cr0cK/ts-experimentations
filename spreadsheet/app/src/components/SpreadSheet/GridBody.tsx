@@ -1,42 +1,40 @@
+import { useStores } from 'hooks/useStores'
+import { observer } from 'mobx-react'
 import * as React from 'react'
 import styled from 'styled-components'
+import GridCell from './GridCell'
 
-interface IGridBodyProps {
+export interface IGridBodyProps {
   className?: string
 }
 
-const GridBody: React.FunctionComponent<IGridBodyProps> = props => {
+export function GridBody(props: IGridBodyProps) {
+  const { storeGrid } = useStores()
+
   return (
-    <tbody className={props.className}>
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-      </tr>
-
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-      </tr>
-
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-      </tr>
-
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-      </tr>
-    </tbody>
+    <div attr-name="GridBody" className={props.className}>
+      {storeGrid.rows.map(cellRow => {
+        return (
+          <div
+            key={`gridRow-${cellRow.getValue()}`}
+            attr-name="GridRows"
+            className="gridRows"
+          >
+            {storeGrid.columns.map(cellColumn => {
+              const cell = storeGrid.getCell(cellColumn, cellRow)
+              return <GridCell key={cell.coord} cell={cell}></GridCell>
+            })}
+          </div>
+        )
+      })}
+    </div>
   )
 }
 
-export default styled(GridBody)`
-  td {
-    border: 1px solid silver;
+const ObserverGridBody = observer(GridBody)
+
+export default styled(ObserverGridBody)`
+  .gridRows {
+    display: flex;
   }
 `

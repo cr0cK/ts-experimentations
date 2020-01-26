@@ -4,9 +4,9 @@ export interface IStores {
   storeGrid: StoreGrid
 }
 
-export default class RootStore {
+export default class StoreRoot {
   private $stores: IStores = {
-    storeGrid: new StoreGrid()
+    storeGrid: new StoreGrid(this)
   }
 
   get stores(): IStores {

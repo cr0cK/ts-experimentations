@@ -1,11 +1,11 @@
 import * as React from 'react'
-import RootStore from 'stores/RootStore'
+import StoreRoot from 'stores/StoreRoot'
 import { Maybe } from 'types/helpers'
 
 export interface IContextStores {
-  rootStore: Maybe<RootStore>
+  storeRoot: Maybe<StoreRoot>
 }
 
-const ContextStores = React.createContext<IContextStores>({ rootStore: null })
+const ContextStores = React.createContext<IContextStores>({ storeRoot: null })
 
 export default ContextStores

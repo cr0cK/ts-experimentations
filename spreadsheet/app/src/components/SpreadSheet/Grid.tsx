@@ -1,7 +1,8 @@
 import * as React from 'react'
+import styled from 'styled-components'
 import GridBody from './GridBody'
 import GridHead from './GridHead'
-import styled from 'styled-components'
+import GridRows from './GridRows'
 
 interface IGridProps {
   className?: string
@@ -9,14 +10,22 @@ interface IGridProps {
 
 const Grid: React.FunctionComponent<IGridProps> = props => {
   return (
-    <table className={props.className}>
+    <div attr-name="Grid" className={props.className}>
       <GridHead />
-      <GridBody />
-    </table>
+
+      <div className="gridRows">
+        <GridRows />
+        <GridBody />
+      </div>
+    </div>
   )
 }
 
 export default styled(Grid)`
   width: 100%;
   border-collapse: collapse;
+
+  .gridRows {
+    display: flex;
+  }
 `
