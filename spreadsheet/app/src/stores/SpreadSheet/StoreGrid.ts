@@ -1,7 +1,7 @@
 import Cell from 'entities/Cell'
 import { buildCellCoord } from 'libs/helpers'
 import { range } from 'lodash'
-import { computed, observable, toJS } from 'mobx'
+import { action, computed, observable } from 'mobx'
 import StoreBase from 'stores/StoreBase'
 import StoreRoot from 'stores/StoreRoot'
 import { CellCoord } from 'types'
@@ -9,10 +9,9 @@ import { Maybe } from 'types/helpers'
 
 export default class StoreGrid extends StoreBase {
   private $columns = observable.array<string>(
-    'ABC'.split('')
-    // 'ABCDEFGHIJKLMNOPQRSTUVWYZ'.split('')
+    'ABCDEFGHIJKLMNOPQRSTUVWYZ'.split('')
   )
-  private $rows = observable.array<number>(range(1, 10))
+  private $rows = observable.array<number>(range(1, 100))
   private $cells = observable.map<CellCoord, Maybe<Cell>>()
 
   /**
@@ -31,7 +30,7 @@ export default class StoreGrid extends StoreBase {
   /**
    * Return a cell, if defined, from a column and a row.
    */
-  getCell(cellColumn: Cell | string, cellRow: Cell | number): Cell {
+  getCellFromColRow(cellColumn: Cell | string, cellRow: Cell | number): Cell {
     const columnValue =
       typeof cellColumn === 'string' ? cellColumn : cellColumn.getValue()
 
@@ -47,15 +46,23 @@ export default class StoreGrid extends StoreBase {
     return this.$cells.get(coord) || new Cell(coord)
   }
 
-  // @action
-  // addTask(task: ITask) {
-  //   this.$tasks.set(task.label, task)
-  // }
+  /**
+   * Return a cell, if defined, from a column and a row.
+   */
+  getCell(cellCoord: CellCoord): Cell {
+    return this.$cells.get(cellCoord) || new Cell(cellCoord)
+  }
 
-  // @action
-  // removeTask(task: ITask) {
-  //   this.$tasks.delete(task.label)
-  // }
+  /**
+   * Set a value in the grid.
+   */
+  @action
+  setCellValue(cellCoord: CellCoord, value: string): this {
+    const cell = new Cell(cellCoord).setValue(value)
+    this.$cells.set(cellCoord, cell)
+
+    return this
+  }
 
   /* Computed */
 

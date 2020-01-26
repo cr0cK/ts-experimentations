@@ -35,5 +35,4 @@ export default styled(App)`
   flex-direction: column;
 
   overflow: scroll;
-  border: 1px solid blue;
 `

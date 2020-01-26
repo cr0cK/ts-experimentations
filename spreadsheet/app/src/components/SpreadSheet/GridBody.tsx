@@ -21,7 +21,7 @@ export function GridBody(props: IGridBodyProps) {
             className="gridRows"
           >
             {storeGrid.columns.map(cellColumn => {
-              const cell = storeGrid.getCell(cellColumn, cellRow)
+              const cell = storeGrid.getCellFromColRow(cellColumn, cellRow)
               return <GridCell key={cell.coord} cell={cell}></GridCell>
             })}
           </div>
