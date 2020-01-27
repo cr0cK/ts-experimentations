@@ -1,93 +1,47 @@
-import { Maybe } from 'types/helpers'
-import { assertUnreachable } from './libs/asserts'
+import * as bodyParser from 'body-parser'
+import * as bunyan from 'bunyan'
+import * as bformat from 'bunyan-format'
+import * as colors from 'colors'
+import * as express from 'express'
+import * as morgan from 'morgan'
 
-// tslint:disable:no-eval
-// tslint:disable:max-classes-per-file
+// setup logger
+const logger = bunyan.createLogger({
+  name: 'server',
+  stream: new bformat({ outputMode: 'short' }),
+  namespace: 'app',
+  level: 'info'
+})
 
-interface IGridCellCoord {
-  column: string
-  row: number
-}
+const app = express()
 
-type GridCellCoord = string
-type GridCellValue = string
+// parse body json data
+app.use(bodyParser.json())
 
-enum GridCellType {
-  string = 'string',
-  number = 'number'
-}
-
-function buildGridCellCoord(gridCellCoordObj: IGridCellCoord): GridCellCoord {
-  return [gridCellCoordObj.column, gridCellCoordObj.row].join(':')
-}
-
-class GridCell {
-  constructor(private $value: Maybe<string>, private $type: GridCellType) {}
-
-  getValue(): GridCellValue {
-    switch (this.$type) {
-      case GridCellType.string:
-        return this.$value || ''
-
-      case GridCellType.number:
-        return String(Number(this.$value || 0))
-
-      default:
-        assertUnreachable(this.$type)
+// use bunyan for express logs
+app.use(
+  morgan('dev', {
+    stream: {
+      write: logger.info.bind(logger)
     }
-  }
-}
-
-class Grid {
-  private $grid: Map<GridCellCoord, GridCell> = new Map()
-
-  setGridCell(gridCellCoordObj: IGridCellCoord, gridCell: GridCell): void {
-    this.$grid.set(buildGridCellCoord(gridCellCoordObj), gridCell)
-  }
-
-  getGridCell(gridCellCoordObj: IGridCellCoord): GridCell {
-    return (
-      this.$grid.get(buildGridCellCoord(gridCellCoordObj)) ||
-      new GridCell(null, GridCellType.string)
-    )
-  }
-
-  getCellValue(cellCoordObj: IGridCellCoord): string | number {
-    const cellGrid = this.getGridCell(cellCoordObj)
-    return cellGrid.getValue()
-  }
-}
-
-const grid = new Grid()
-
-grid.setGridCell(
-  { column: 'A', row: 1 },
-  new GridCell('10', GridCellType.number)
+  })
 )
 
-const cases = [
-  // 42
-  eval(`(new GridCell('42', GridCellType.number)).getValue()`),
+const apiPort = 3010
 
-  // 'foo'
-  eval(`(new GridCell('foo', GridCellType.number)).getValue()`),
+// start the server
+app.listen(apiPort, '0.0.0.0', (err: any) => {
+  if (err) {
+    logger.error('Error when starting the server.')
 
-  // =$A1
-  eval(`grid.getCellValue({ column: 'A', row: 1 })`),
+    if (err.stack) {
+      logger.debug(err.stack)
+    }
 
-  // =$A1+42
-  eval(
-    `grid.getCellValue({ column: 'A', row: 1 }) + (new GridCell('42', GridCellType.number)).getValue()`
+    return
+  }
+
+  logger.info(
+    `Server is listening on ${colors.bold.underline(`0.0.0.0:${apiPort}`)}.`
   )
-
-  // =$A1+$A2
-  // eval(grid.getCell('A', 1) + grid.getCell('A', 2))
-
-  // =($A1+$A2)/$B3
-  // eval((grid.getCell('A', 1) + grid.getCell('A', 2)) / grid.getCell('B', 3))
-
-  // =`Math.round($A1)`
-  // eval(Math.round(grid.getCell('A', 1))
-].forEach(result => {
-  console.log('result?', result)
 })

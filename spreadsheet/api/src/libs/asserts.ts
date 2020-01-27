@@ -1,4 +1,4 @@
-import { Maybe } from 'types/helpers'
+import { Maybe } from 'types'
 
 /**
  * Allow to implement all cases of a switch statement.
