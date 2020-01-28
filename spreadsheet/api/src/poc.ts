@@ -4,19 +4,6 @@ import { assertUnreachable } from './libs/asserts'
 // tslint:disable:no-eval
 // tslint:disable:max-classes-per-file
 
-interface IGridCellCoord {
-  column: string
-  row: number
-}
-
-type GridCellCoord = string
-type GridCellValue = string
-
-enum GridCellType {
-  string = 'string',
-  number = 'number'
-}
-
 function buildGridCellCoord(gridCellCoordObj: IGridCellCoord): GridCellCoord {
   return [gridCellCoordObj.column, gridCellCoordObj.row].join(':')
 }
@@ -26,11 +13,11 @@ class GridCell {
 
   getValue(): GridCellValue {
     switch (this.$type) {
-      case GridCellType.string:
-        return this.$value || ''
+      // case GridCellType.string:
+      //   return this.$value || ''
 
       case GridCellType.number:
-        return String(Number(this.$value || 0))
+        return Number(this.$value || 0)
 
       default:
         assertUnreachable(this.$type)
@@ -48,11 +35,11 @@ class Grid {
   getGridCell(gridCellCoordObj: IGridCellCoord): GridCell {
     return (
       this.$grid.get(buildGridCellCoord(gridCellCoordObj)) ||
-      new GridCell(null, GridCellType.string)
+      new GridCell(null, GridCellType.number)
     )
   }
 
-  getCellValue(cellCoordObj: IGridCellCoord): string | number {
+  getCellValue(cellCoordObj: IGridCellCoord): GridCellValue {
     const cellGrid = this.getGridCell(cellCoordObj)
     return cellGrid.getValue()
   }
@@ -70,7 +57,7 @@ const cases = [
   eval(`(new GridCell('42', GridCellType.number)).getValue()`),
 
   // 'foo'
-  eval(`(new GridCell('foo', GridCellType.number)).getValue()`),
+  // eval(`(new GridCell('foo', GridCellType.string)).getValue()`),
 
   // =$A1
   eval(`grid.getCellValue({ column: 'A', row: 1 })`),

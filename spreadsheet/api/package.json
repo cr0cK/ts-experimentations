@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "tsc -w",
     "watch": "nodemon -w build -x \"node build/index.js\" --on-change"
   },
@@ -26,6 +26,7 @@
     "@types/morgan": "^1.7.37",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
+    "ts-jest": "^25.0.0",
     "typescript": "^3.7.5"
   }
 }
