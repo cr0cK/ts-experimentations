@@ -1,6 +1,6 @@
-import FormStore from '../../stores/Tasks/FormStore'
-import TasksStore from '../../stores/Tasks/TasksStore'
-import { ITask } from '../../stores/Tasks/types'
+import FormStore from 'stores/Tasks/FormStore'
+import TasksStore from 'stores/Tasks/TasksStore'
+import { ITask } from 'stores/Tasks/types'
 
 /**
  * Add a task.

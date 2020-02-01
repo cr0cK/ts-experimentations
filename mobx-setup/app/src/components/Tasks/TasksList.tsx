@@ -1,7 +1,7 @@
+import SubTitle from 'components/Common/SubTitle'
+import { useStores } from 'hooks/useStores'
 import { observer } from 'mobx-react'
 import * as React from 'react'
-import { useStores } from '../../hooks/useStores'
-import SubTitle from '../Common/SubTitle'
 import TaskItem from './TaskItem'
 
 interface ITasksListProps {}

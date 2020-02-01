@@ -27,16 +27,4 @@ export default class FormStore {
     this.$fieldValues.set(fieldName, fieldValue)
     return this
   }
-
-  @action
-  onInputTextChange = (e: React.ChangeEvent<HTMLInputElement>): this => {
-    this.$fieldValues.set(e.target.name, e.target.value)
-    return this
-  }
-
-  @action
-  onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>): this => {
-    this.$fieldValues.set(e.target.name, e.target.checked)
-    return this
-  }
 }

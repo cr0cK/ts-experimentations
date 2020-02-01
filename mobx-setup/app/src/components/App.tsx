@@ -1,8 +1,7 @@
+import ContextStores from 'contexts/ContextStores'
 import { configure } from 'mobx'
 import * as React from 'react'
-import ContextStores from '../contexts/ContextStores'
-import RootStore from '../stores/RootStore'
-import '../styles/App.css'
+import RootStore from 'stores/RootStore'
 import Tasks from './Tasks'
 
 interface IAppProps {}

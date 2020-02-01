@@ -1,9 +1,13 @@
 import { observer } from 'mobx-react'
 import * as React from 'react'
-import { useStores } from '../../hooks/useStores'
-import FormStore from '../../stores/Tasks/FormStore'
-import Form from '../Common/Form'
-import SubTitle from '../Common/SubTitle'
+import {
+  onInputTextChange,
+  onCheckboxChange
+} from 'components/Common/Form/handlers'
+import FormStore from 'stores/Tasks/FormStore'
+import { useStores } from 'hooks/useStores'
+import SubTitle from 'components/Common/SubTitle'
+import Form from 'components/Common/Form'
 import { onAddTaskSubmit } from './handlers'
 
 interface ITaskFormProps {
@@ -27,7 +31,7 @@ const TaskForm: React.FunctionComponent<ITaskFormProps> = props => {
             id="taskLabel"
             type="text"
             name="label"
-            onChange={storeForm.onInputTextChange}
+            onChange={onInputTextChange(storeForm)}
             value={storeForm.getFieldValue('label')}
           />
         </div>
@@ -38,7 +42,7 @@ const TaskForm: React.FunctionComponent<ITaskFormProps> = props => {
             id="taskState"
             type="checkbox"
             name="done"
-            onChange={storeForm.onCheckboxChange}
+            onChange={onCheckboxChange(storeForm)}
             checked={storeForm.getFieldValueAsBoolean('done')}
           />
         </div>

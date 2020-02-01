@@ -1,6 +1,6 @@
 import * as React from 'react'
-import RootStore from '../stores/RootStore'
-import { Maybe } from '../types/common'
+import { Maybe } from 'types/common'
+import RootStore from 'stores/RootStore'
 
 export interface IContextStores {
   rootStore: Maybe<RootStore>

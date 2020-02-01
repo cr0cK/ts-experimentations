@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { useStores } from '../../hooks/useStores'
-import { ITask } from '../../stores/Tasks/types'
-import { onTasksDeleteButtonClick } from './handlers'
+import { ITask } from 'stores/Tasks/types'
+import { useStores } from 'hooks/useStores'
 import TaskLabel from './TaskLabel'
 import TaskStatus from './TaskStatus'
+import { onTasksDeleteButtonClick } from './handlers'
 
 interface ITaskItemProps {
   className?: string
