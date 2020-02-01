@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 
 export type FieldName = string
 export type FieldValue = string | boolean
@@ -26,5 +26,12 @@ export default class FormStore {
   setFieldValue(fieldName: FieldName, fieldValue: FieldValue): this {
     this.$fieldValues.set(fieldName, fieldValue)
     return this
+  }
+
+  /* Computed */
+
+  @computed
+  get fieldValues(): Map<FieldName, FieldValue> {
+    return this.$fieldValues.toJS()
   }
 }
