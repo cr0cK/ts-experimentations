@@ -9,5 +9,5 @@ export const onInputTextChange = (formStore: FormStore) => (
 export const onCheckboxChange = (formStore: FormStore) => (
   e: React.ChangeEvent<HTMLInputElement>
 ): void => {
-  formStore.setFieldValue(e.target.name, e.target.value)
+  formStore.setFieldValue(e.target.name, e.target.checked)
 }

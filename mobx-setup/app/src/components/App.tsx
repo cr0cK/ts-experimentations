@@ -14,7 +14,7 @@ const App: React.FunctionComponent<IAppProps> = props => {
 
   return (
     <ContextStores.Provider value={{ rootStore: rootStore }}>
-      <div className="App">
+      <div data-testid="App" className="App">
         <header className="App-header">
           <Tasks />
         </header>
