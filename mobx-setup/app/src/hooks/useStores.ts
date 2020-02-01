@@ -1,6 +1,6 @@
+import ContextStores from 'contexts/ContextStores'
 import * as React from 'react'
-import RootStore, { IStores } from '../stores/RootStore'
-import ContextStores from '../contexts/ContextStores'
+import RootStore, { IStores } from 'stores/RootStore'
 
 /**
  * Retrieve MobX stores from the context.
